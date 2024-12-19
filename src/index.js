@@ -15,7 +15,7 @@ const startServer = async () => {
       console.log(`Server is listening on http://localhost:${PORT}`);
     });   
     app.get("/", (req, res) => {
-      res.send("Hello World!");
+      res.send("Server running successfully.");
     });
 
   } catch (error) {
