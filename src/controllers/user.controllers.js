@@ -145,11 +145,25 @@ const loginUser = asyncHandler(async (req, res) => {
 
 const logoutUser = asyncHandler(async(req, res)=>{
   await User.findByIdAndUpdate(
-    // Need to set up middleware first.
+    req.user._id,
+    {
+      $set : {
+        refreshToken: undefined,
+      }
+    },
+    {new: true}
   )
+
+  const options = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  }
+  res.send
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(200, {}, "User logged out successfully")
 })
-
-
 
 const refereshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
@@ -193,4 +207,4 @@ const refereshAccessToken = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser, refereshAccessToken };
+export { registerUser, loginUser, refereshAccessToken, logoutUser };
