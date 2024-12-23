@@ -167,7 +167,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json(200, {}, "User logged out successfully");
 });
 
-const refereshAccessToken = asyncHandler(async (req, res) => {
+const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
     req.cookies.refreshToken || req.body.refreshToken;
 
@@ -429,7 +429,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
 export {
   registerUser,
   loginUser,
-  refereshAccessToken,
+  refreshAccessToken,
   logoutUser,
   changeCurrentPassword,
   getCurrentUser,
